@@ -2,7 +2,7 @@ export interface RegisterRequest {
     firstName: string;
     lastName: string;
     email: string;
-    role: string; // Change to enum
+    role: 'CUSTOMER' | 'ADMIN'; // Change to enum
     password: string;
 }
 
