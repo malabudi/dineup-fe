@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
@@ -8,13 +8,17 @@ import {
   AuthenticationResponse,
   RegisterRequest
 } from '../../models/auth.models';
+import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly baseUrl = `${environment.apiUrl}/auth`;
   private readonly TOKEN_KEY = 'dineup_token';
+  private readonly isBrowser: boolean;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) {
+    this.isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
+  }
 
   register(request: RegisterRequest): Observable<AuthenticationResponse> {
     return this.http
@@ -29,11 +33,15 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(this.TOKEN_KEY);
+    if (this.isBrowser) {
+      localStorage.removeItem(this.TOKEN_KEY);
+    }
+
     this.router.navigate(['/login']);
   }
 
   getToken(): string | null {
+    if (!this.isBrowser) return null;
     return localStorage.getItem(this.TOKEN_KEY);
   }
 
@@ -77,6 +85,7 @@ export class AuthService {
   }
 
   private storeToken(token: string): void {
+    if (!this.isBrowser) return;
     localStorage.setItem(this.TOKEN_KEY, token);
   }
 
