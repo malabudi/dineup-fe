@@ -29,6 +29,11 @@ export class LoginComponent {
   ) {}
 
   onSubmit() {
+    if (!this.form.email || !this.form.password) {
+      this.errorMessage = 'Please fill in all fields.';
+      return;
+    }
+
     this.errorMessage = '';
     this.loading = true;
 
@@ -42,9 +47,9 @@ export class LoginComponent {
       },
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err.status == 403 
+        this.errorMessage = err.status == 401
         ? 'Invalid email or password' 
-        : 'Something went wrong. Please try again.';
+        : 'Something went wrong, please try again.';
       },
       complete: () => {
         this.loading = false;
