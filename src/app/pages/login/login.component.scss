@@ -1,0 +1,63 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.form-container {
+    position: relative;
+    max-width: 90vw;
+    width: 400px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: var(--color-surface);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+}
+
+h1 {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.submit-button {
+    margin-top: 2rem;
+}
+
+.sign-up {
+    text-align: center;
+    color: var(--color-text-secondary);
+    margin-top: 1.5rem;
+}
+
+.error-banner {
+    background-color: var(--color-error);
+    color: white;
+    border-radius: 4px;
+    padding: 0;
+    overflow: hidden;
+    max-height: 0;
+    text-align: left;
+    opacity: 0;
+    transition: opacity 0.2s ease, max-height 0.2s ease, padding 0.2s ease;
+
+    &.visible {
+        opacity: 1;
+        max-height: 100px;
+        padding: 0.75rem 1rem;
+        margin-bottom: 1rem;
+        animation: slideDown 0.2s ease forwards;
+    }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
