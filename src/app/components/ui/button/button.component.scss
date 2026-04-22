@@ -1,3 +1,7 @@
+:host {
+  display: block;
+}
+
 .btn {
   gap: 0.5rem;
   padding: 0.625rem 1.25rem;
@@ -7,6 +11,7 @@
   font-weight: 500;
   cursor: pointer;
   transition: background 0.2s ease, opacity 0.2s ease;
+  width: 100%;
 
   &:disabled {
     opacity: 0.6;
@@ -15,29 +20,29 @@
 
   // Variants
   &--primary {
-    background-color: #e74c3c;
+    background-color: var(--color-primary);
     color: white;
 
     &:hover:not(:disabled) {
-      background-color: #c0392b;
+      background-color: #b33432;
     }
   }
 
   &--secondary {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--color-secondary);
+    color: white;
 
     &:hover:not(:disabled) {
-      background-color: #ddd;
+      background-color: #deb26a;
     }
   }
 
   &--danger {
-    background-color: #c0392b;
+    background-color: var(--color-error);
     color: white;
 
     &:hover:not(:disabled) {
-      background-color: #962d22;
+      background-color: #dd4e3e;
     }
   }
 

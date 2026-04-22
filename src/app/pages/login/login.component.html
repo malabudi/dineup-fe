@@ -1,44 +1,43 @@
-<div class="login-container">
-  <h2>Sign In</h2>
-  
-  <div *ngIf="errorMessage" class="error-banner">
+<div class="form-container">
+  <h1>Welcome Back</h1>
+
+  <div [class.visible]="errorMessage" class="error-banner">
     {{ errorMessage }}
   </div>
 
   <form (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        [(ngModel)]="form.email"
-        name="email"
-        required
-        placeholder="Email address"
-      />
-    </div>
+    <app-input 
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Email"
+      [required]="true"
+      label="Email"
+      [value]="form.email"
+      (valueChange)="form.email = $event"
+    />
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        [(ngModel)]="form.password"
-        name="password"
-        required
-        placeholder="Password"
-      />
-    </div>
+    <app-input 
+      id="password"
+      type="password"
+      name="password"
+      placeholder="Password"
+      [required]="true"
+      label="Password"
+      [value]="form.password"
+      (valueChange)="form.password = $event"
+    />
 
     <app-button 
-      label="Sign In"
+      label="Login"
       [loading]="loading" 
       type="submit"
       variant="primary"
+      class="submit-button"
     />
 
   </form>
 
-  <p>Don't have an account? <a routerLink="/register">Register</a></p>
+  <p class="sign-up">Don't have an account? <a routerLink="/register">Sign Up</a></p>
 </div>

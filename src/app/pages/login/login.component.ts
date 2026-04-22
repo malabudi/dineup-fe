@@ -5,11 +5,12 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthenticationRequest } from '../../models/auth.models';
 import { AuthService } from '../../core/services/auth.service';
 import { ButtonComponent } from '../../components/ui/button/button.component';
+import { InputComponent } from "../../components/ui/input/input.component";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent],
+  imports: [CommonModule, FormsModule, RouterLink, ButtonComponent, InputComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
