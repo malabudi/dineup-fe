@@ -1,61 +1,65 @@
-<div class="register-container">
-  <h2>Create Account</h2>
+<div class="form-container">
+  <h1>Create Account</h1>
 
-  <div *ngIf="errorMessage" class="error-banner">
+  <div [class.visible]="errorMessage" class="error-banner">
     {{ errorMessage }}
   </div>
 
   <form (ngSubmit)="onSubmit()">
 
-    <div class="form-group">
-      <label for="firstName">First Name</label>
-      <input
-        id="firstName"
-        type="text"
-        [(ngModel)]="form.firstName"
-        name="firstName"
-        required
-      />
-    </div>
+    <app-input
+      id="firstName"
+      type="text"
+      name="firstName"
+      placeholder="First name"
+      label="First Name"
+      [required]="true"
+      [value]="form.firstName"
+      (valueChange)="form.firstName = $event"
+    />
 
-    <div class="form-group">
-      <label for="lastName">Last Name</label>
-      <input
-        id="lastName"
-        type="text"
-        [(ngModel)]="form.lastName"
-        name="lastName"
-        required
-      />
-    </div>
+    <app-input
+      id="lastName"
+      type="text"
+      name="lastName"
+      placeholder="Last name"
+      label="Last Name"
+      [required]="true"
+      [value]="form.lastName"
+      (valueChange)="form.lastName = $event"
+    />
 
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        id="email"
-        type="email"
-        [(ngModel)]="form.email"
-        name="email"
-        required
-      />
-    </div>
+    <app-input
+      id="email"
+      type="email"
+      name="email"
+      placeholder="Email address"
+      label="Email"
+      [required]="true"
+      [value]="form.email"
+      (valueChange)="form.email = $event"
+    />
 
-    <div class="form-group">
-      <label for="password">Password</label>
-      <input
-        id="password"
-        type="password"
-        [(ngModel)]="form.password"
-        name="password"
-        required
-      />
-    </div>
+    <app-input
+      id="password"
+      type="password"
+      name="password"
+      placeholder="Password"
+      label="Password"
+      [required]="true"
+      [value]="form.password"
+      (valueChange)="form.password = $event"
+    />
 
-    <button type="submit" [disabled]="loading">
-      {{ loading ? 'Creating account...' : 'Register' }}
-    </button>
+    <app-button
+      label="Create Account"
+      [loading]="loading"
+      type="submit"
+      variant="primary"
+      class="submit-button"
+    />
 
   </form>
 
-  <p>Already have an account? <a routerLink="/login">Sign In</a></p>
+  <p class="sign-up">Already have an account? <a routerLink="/login">Sign In</a></p>
 </div>
