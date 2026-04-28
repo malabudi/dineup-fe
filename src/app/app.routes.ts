@@ -16,11 +16,16 @@ export const routes: Routes = [
     canActivate: [guestGuard]
   },
   {
-    path: 'menu',
+    path: '',
     loadComponent: () =>
-      import('./pages/menu/menu.component').then(m => m.MenuComponent),
-    canActivate: [authGuard]
-  },
-  {path: '', redirectTo: 'menu', pathMatch: 'full'},
-  { path: '**', redirectTo: 'login' }
+      import('./shared/layout/layout.component').then(m => m.LayoutComponent),
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'menu',
+        loadComponent: () =>
+          import('./pages/menu/menu.component').then(m => m.MenuComponent)
+      },
+    ]
+  }
 ];
