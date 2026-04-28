@@ -1,0 +1,28 @@
+<nav class="navbar">
+
+  <a routerLink="/menu" class="navbar__brand">
+    DineUp
+  </a>
+
+  <div class="navbar__actions">
+
+    <a routerLink="/orders" class="navbar__link">My Orders</a>
+
+    <a routerLink="/checkout" class="navbar__cart">
+      <span class="navbar__cart-icon">🛒</span>
+      <span
+        class="navbar__cart-badge"
+        *ngIf="(itemCount$ | async) ?? 0 as count"
+        [class.visible]="count > 0"
+      >
+        {{ count }}
+      </span>
+    </a>
+
+    <button class="navbar__logout" (click)="logout()">
+      Sign Out
+    </button>
+
+  </div>
+
+</nav>
