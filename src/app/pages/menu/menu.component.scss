@@ -1,0 +1,82 @@
+.menu {
+
+  &__loading,
+  &__error {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    color: var(--color-text-secondary);
+    font-size: 1rem;
+  }
+
+  &__error {
+    color: var(--color-error);
+  }
+
+  // Sticky tab bar sits just below the navbar
+  &__tabs {
+    position: sticky;
+    top: 64px;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin: 0 -2rem;      // bleed out of layout padding
+    padding: 0 2rem;      // re-add as inner padding
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__tab {
+    flex-shrink: 0;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 1rem 1.25rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+
+    &.active {
+      color: var(--color-primary);
+      border-bottom-color: var(--color-primary);
+      font-weight: 600;
+    }
+  }
+
+  &__sections {
+    padding-top: 2rem;
+  }
+
+  &__section {
+    margin-bottom: 3rem;
+
+    &-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--color-text-primary);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--color-highlight);
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
+  }
+}

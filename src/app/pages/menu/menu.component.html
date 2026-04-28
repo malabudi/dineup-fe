@@ -1,1 +1,49 @@
-<p>menu works!</p>
+<div class="menu">
+
+  <!-- Loading state -->
+  <div *ngIf="loading" class="menu__loading">
+    <p>Loading menu...</p>
+  </div>
+
+  <!-- Error state -->
+  <div *ngIf="error" class="menu__error">
+    <p>Failed to load the menu. Please try again.</p>
+  </div>
+
+  <!-- Menu content -->
+  <ng-container *ngIf="!loading && !error">
+
+    <!-- Sticky group tab bar -->
+    <div class="menu__tabs">
+      <button
+        *ngFor="let group of menuGroups; trackBy: trackByGroupId"
+        class="menu__tab"
+        [class.active]="activeGroupId === group.id"
+        (click)="scrollToGroup(group.id)"
+      >
+        {{ group.name }}
+      </button>
+    </div>
+
+    <!-- Group sections -->
+    <div class="menu__sections">
+      <section
+        *ngFor="let group of menuGroups; trackBy: trackByGroupId"
+        #groupSection
+        class="menu__section"
+      >
+        <h2 class="menu__section-title">{{ group.name }}</h2>
+
+        <div class="menu__grid">
+          <app-menu-item-card
+            *ngFor="let item of group.items; trackBy: trackByMenuItemId"
+            [menuItem]="item"
+          />
+        </div>
+
+      </section>
+    </div>
+
+  </ng-container>
+
+</div>

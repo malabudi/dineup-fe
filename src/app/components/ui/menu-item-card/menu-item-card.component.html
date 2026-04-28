@@ -1,0 +1,44 @@
+<div class="card">
+
+  <!-- Image/Placeholder -->
+  <div class="card__image-wrapper">
+    <img
+      *ngIf="menuItem.imageUrl"
+      [src]="menuItem.imageUrl"
+      [alt]="menuItem.name"
+      class="card__image"
+    />
+    <div *ngIf="!menuItem.imageUrl" class="card__image-placeholder">
+      🍽️
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="card__content">
+    <h3 class="card__name">{{ menuItem.name }}</h3>
+    <p class="card__description">{{ menuItem.description }}</p>
+    <p class="card__price">${{ menuItem.price | number:'1.2-2' }}</p>
+  </div>
+
+  <!-- Cart controls -->
+  <div class="card__actions">
+
+    <!-- Shows just the Add button when quantity is 0 -->
+    <button
+      *ngIf="quantity === 0"
+      class="card__add-btn"
+      (click)="add()"
+    >
+      Add
+    </button>
+
+    <!-- Shows quantity controls once item is in cart -->
+    <div *ngIf="quantity > 0" class="card__quantity">
+      <button class="card__quantity-btn" (click)="decrement()">−</button>
+      <span class="card__quantity-value">{{ quantity }}</span>
+      <button class="card__quantity-btn" (click)="add()">+</button>
+    </div>
+
+  </div>
+
+</div>
