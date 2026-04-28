@@ -58,8 +58,11 @@ export class RegisterComponent {
 
     this.authService.register(this.form).subscribe({
       next: () => {
-        // register() also stores JWT token via tap()
-        this.router.navigate(['/menu']);
+        if (this.authService.isAdmin()) {
+          this.router.navigate(['/admin']);
+        } else {
+          this.router.navigate(['/menu']);
+        }
       },
       error: (err) => {
         this.loading = false;

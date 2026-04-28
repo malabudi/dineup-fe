@@ -40,7 +40,7 @@ export class LoginComponent {
     this.authService.login(this.form).subscribe({
       next: () => {
         if (this.authService.isAdmin()) {
-          this.router.navigate(['/admin/orders']);
+          this.router.navigate(['/admin']);
         } else {
           this.router.navigate(['/menu']);
         }
