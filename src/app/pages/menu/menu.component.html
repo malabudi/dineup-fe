@@ -30,6 +30,7 @@
       <section
         *ngFor="let group of menuGroups; trackBy: trackByGroupId"
         #groupSection
+        [attr.data-group-id]="group.id"
         class="menu__section"
       >
         <h2 class="menu__section-title">{{ group.name }}</h2>
