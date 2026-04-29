@@ -9,6 +9,7 @@ import {
   RegisterRequest
 } from '../../models/auth.models';
 import { isPlatformBrowser } from '@angular/common';
+import { CartService } from '../../services/cart.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -16,7 +17,11 @@ export class AuthService {
   private readonly TOKEN_KEY = 'dineup_token';
   private readonly isBrowser: boolean;
 
-  constructor(private http: HttpClient, private router: Router) {
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private cartService: CartService
+  ) {
     this.isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
   }
 
@@ -37,6 +42,7 @@ export class AuthService {
       localStorage.removeItem(this.TOKEN_KEY);
     }
 
+    this.cartService.clearCart();
     this.router.navigate(['/login']);
   }
 
