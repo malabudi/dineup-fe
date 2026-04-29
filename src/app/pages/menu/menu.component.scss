@@ -17,9 +17,11 @@
   // Sticky tab bar sits just below the navbar
   &__tabs {
     position: sticky;
-    top: 64px;
+    top: 0px;
     z-index: 100;
-    background-color: var(--color-bg);
+    background-color: rgba(253, 246, 236, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px); // Safari support
     border-bottom: 1px solid var(--color-border);
     display: flex;
     gap: 0;
@@ -70,7 +72,7 @@
       color: var(--color-text-primary);
       margin-bottom: 1.25rem;
       padding-bottom: 0.5rem;
-      border-bottom: 2px solid var(--color-highlight);
+      border-bottom: 2px solid var(--color-text-muted);
     }
   }
 

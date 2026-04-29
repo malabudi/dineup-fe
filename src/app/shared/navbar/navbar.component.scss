@@ -13,6 +13,7 @@
     color: white;
     text-decoration: none;
     letter-spacing: 0.02em;
+    transition: color 0.2s ease;
 
     &:hover {
       color: var(--color-highlight);
@@ -33,7 +34,7 @@
     transition: color 0.2s ease;
 
     &:hover {
-      color: white;
+     color: var(--color-highlight);
     }
   }
 

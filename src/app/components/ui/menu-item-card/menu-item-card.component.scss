@@ -14,8 +14,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(67, 40, 24, 0.12);
+    transform: scale(1.0075);
   }
 
   &__image-wrapper {
