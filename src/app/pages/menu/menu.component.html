@@ -1,17 +1,12 @@
 <div class="menu">
 
-  <!-- Loading state -->
-  <div *ngIf="loading" class="menu__loading">
-    <p>Loading menu...</p>
-  </div>
-
   <!-- Error state -->
   <div *ngIf="error" class="menu__error">
     <p>Failed to load the menu. Please try again.</p>
   </div>
 
   <!-- Menu content -->
-  <ng-container *ngIf="!loading && !error">
+  <ng-container *ngIf="menuGroups.length > 0 && !error">
 
     <!-- Sticky group tab bar -->
     <div class="menu__tabs">

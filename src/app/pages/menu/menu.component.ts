@@ -14,7 +14,6 @@ import { MenuService } from '../../services/menu.service';
 export class MenuComponent {
 
   menuGroups: ResponseMenuGroupDto[] = [];
-  loading = true;
   error = false;
   activeGroupId: number | null = null;
 
@@ -37,14 +36,11 @@ export class MenuComponent {
           this.activeGroupId = this.menuGroups[0].id; // Set first group as active by default
         }
 
-        this.loading = false;
-
         // Wait for the DOM to render the sections before observing
         setTimeout(() => this.initScrollSpy(), 0);
       },
       error: () => {
         this.error = true;
-        this.loading = false;
       }
     })
   }

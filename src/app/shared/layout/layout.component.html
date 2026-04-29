@@ -1,4 +1,10 @@
 <app-navbar />
+
+<app-loading-spinner
+  *ngIf="loading$ | async"
+  [fullPage]="true"
+/>
+
 <main class="layout__content">
   <router-outlet />
 </main>
