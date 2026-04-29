@@ -18,9 +18,14 @@ export class MenuComponent {
   error = false;
   activeGroupId: number | null = null;
 
-  @ViewChildren('groupsSection') groupsSections!: QueryList<ElementRef>;
+  private observer!: IntersectionObserver;
+  private isScrollingProgrammatically = false;
 
-  constructor(private menuService: MenuService) {}
+  @ViewChildren('groupSection') groupSection!: QueryList<ElementRef>;
+
+  constructor(
+    private menuService: MenuService
+  ) {}
 
   ngOnInit(): void {
     this.menuService.getMenuGroups().subscribe({
@@ -33,6 +38,9 @@ export class MenuComponent {
         }
 
         this.loading = false;
+
+        // Wait for the DOM to render the sections before observing
+        setTimeout(() => this.initScrollSpy(), 0);
       },
       error: () => {
         this.error = true;
@@ -41,10 +49,35 @@ export class MenuComponent {
     })
   }
 
+  private initScrollSpy(): void {
+  this.observer = new IntersectionObserver(
+    (entries) => {
+      if (this.isScrollingProgrammatically) return;
+
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = Number(entry.target.getAttribute('data-group-id'));
+          this.activeGroupId = id;
+        }
+      });
+    },
+    {
+      // Fires when section hits 20% into the viewport from the top
+      rootMargin: '-20% 0px -70% 0px',
+      threshold: 0
+    }
+  );
+
+  this.groupSection.forEach((section, index) => {
+    this.observer.observe(section.nativeElement);
+  });
+}
+
   scrollToGroup(groupId: number): void {
     this.activeGroupId = groupId;
+    this.isScrollingProgrammatically = true;
 
-    const sections = this.groupsSections.toArray();
+    const sections = this.groupSection.toArray();
     const index = this.menuGroups.findIndex(group => group.id === groupId);
 
     if (sections[index]) {
@@ -53,6 +86,11 @@ export class MenuComponent {
         block: 'start' 
       });
     }
+
+    // Re-enable observer after scroll animation finishes
+    setTimeout(() => {
+      this.isScrollingProgrammatically = false;
+    }, 800);
   }
 
   trackByGroupId(index: number, group: ResponseMenuGroupDto): number {
@@ -61,5 +99,11 @@ export class MenuComponent {
 
   trackByMenuItemId(index: number, item: any): number {
     return item.id;
+  }
+
+  ngOnDestroy(): void {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
   }
 }
