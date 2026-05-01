@@ -8,16 +8,16 @@
 
     <a routerLink="/orders" class="navbar__link">My Orders</a>
 
-    <a routerLink="/checkout" class="navbar__cart">
+    <button routerLink="/checkout" class="navbar__cart">
       <span class="navbar__cart-icon">🛒</span>
       <span
         class="navbar__cart-badge"
         *ngIf="(itemCount$ | async) ?? 0 as count"
         [class.visible]="count > 0"
       >
-        {{ count }}
+        {{ itemCount$ | async }}
       </span>
-    </a>
+    </button>
 
     <button class="navbar__logout" (click)="logout()">
       Sign Out
