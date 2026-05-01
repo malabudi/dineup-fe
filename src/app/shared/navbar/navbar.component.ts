@@ -26,6 +26,10 @@ export class NavbarComponent implements OnInit {
     this.itemCount$ = this.cartService.itemCount$;
   }
 
+  toggleCart(): void {
+    this.cartService.toggleDrawer();
+  }
+
   logout(): void {
     this.authService.logout();
   }
