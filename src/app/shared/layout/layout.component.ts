@@ -5,11 +5,18 @@ import { Observable } from 'rxjs';
 import { LoadingService } from '../../core/services/loading.service';
 import { LoadingSpinnerComponent } from '../../components/ui/loading-spinner/loading-spinner.component';
 import { CommonModule } from '@angular/common';
+import { CartDrawerComponent } from '../cart-drawer/cart-drawer.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, CommonModule, LoadingSpinnerComponent],
+  imports: [
+    RouterOutlet, 
+    NavbarComponent, 
+    CommonModule, 
+    LoadingSpinnerComponent, 
+    CartDrawerComponent
+  ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'
 })

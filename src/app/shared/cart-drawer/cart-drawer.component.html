@@ -1,0 +1,66 @@
+<!-- Backdrop -->
+<div
+  class="cart-backdrop"
+  [class.visible]="isDrawerOpen$ | async"
+  (click)="closeDrawer()"
+></div>
+
+<!-- Drawer -->
+<div class="cart-drawer" [class.open]="isDrawerOpen$ | async">
+
+  <!-- Header -->
+  <div class="cart-drawer__header">
+    <h2>Your Cart</h2>
+    <button class="cart-drawer__close" (click)="closeDrawer()">✕</button>
+  </div>
+
+  <!-- Empty state -->
+  <div
+    *ngIf="(cartItems$ | async)?.length === 0"
+    class="cart-drawer__empty"
+  >
+    <p>🛒</p>
+    <p>Your cart is empty</p>
+    <span>Add items from the menu to get started</span>
+  </div>
+
+  <!-- Cart items -->
+  <div class="cart-drawer__items">
+    <div
+      *ngFor="let item of cartItems$ | async; trackBy: trackByItemId"
+      class="cart-item"
+    >
+      <div class="cart-item__info">
+        <p class="cart-item__name">{{ item.menuItemName }}</p>
+        <p class="cart-item__price">${{ item.price | number:'1.2-2' }}</p>
+      </div>
+
+      <div class="cart-item__controls">
+        <button class="cart-item__btn" (click)="decrementItemQuantity(item)">-</button>
+        <span class="cart-item__quantity">{{ item.quantity }}</span>
+        <button class="cart-item__btn" (click)="incrementItemQuantity(item)">+</button>
+        <button class="cart-item__remove" (click)="removeItem(item)">🗑</button>
+      </div>
+
+      <p class="cart-item__line-total">
+        ${{ (item.price * item.quantity) | number:'1.2-2' }}
+      </p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div
+    class="cart-drawer__footer"
+    *ngIf="(cartItems$ | async)?.length ?? 0 > 0"
+  >
+    <div class="cart-drawer__total">
+      <span>Total</span>
+      <span>${{ totalPrice$ | async | number:'1.2-2' }}</span>
+    </div>
+
+    <button class="cart-drawer__checkout-btn" (click)="proceedToCheckout()">
+      Proceed to Checkout
+    </button>
+  </div>
+
+</div>
