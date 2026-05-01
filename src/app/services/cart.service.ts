@@ -14,6 +14,9 @@ export interface CartItem {
 export class CartService {
 
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
+  private drawerOpenSubject = new BehaviorSubject<boolean>(false);
+
+  drawerOpen$ = this.drawerOpenSubject.asObservable();
 
   // Public observable for cart items
   cartItems$ = this.cartItemsSubject.asObservable();
@@ -75,5 +78,18 @@ export class CartService {
 
   clearCart(): void {
     this.cartItemsSubject.next([]);
+  }
+
+  // Drawer state management
+  openDrawer(): void {
+    this.drawerOpenSubject.next(true);
+  }
+
+  closeDrawer(): void {
+    this.drawerOpenSubject.next(false);
+  }
+
+  toggleDrawer(): void {
+    this.drawerOpenSubject.next(!this.drawerOpenSubject.getValue());
   }
 }
