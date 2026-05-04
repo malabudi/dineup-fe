@@ -21,7 +21,7 @@
   >
     <p>🛒</p>
     <p>Your cart is empty</p>
-    <span>Add items from the menu to get started</span>
+    <span>Add items from the menu to start your order!</span>
   </div>
 
   <!-- Cart items -->
@@ -35,16 +35,17 @@
         <p class="cart-item__price">${{ item.price | number:'1.2-2' }}</p>
       </div>
 
+      <p class="cart-item__line-total">
+        ${{ (item.price * item.quantity) | number:'1.2-2' }}
+      </p>
+
       <div class="cart-item__controls">
         <button class="cart-item__btn" (click)="decrementItemQuantity(item)">-</button>
         <span class="cart-item__quantity">{{ item.quantity }}</span>
         <button class="cart-item__btn" (click)="incrementItemQuantity(item)">+</button>
-        <button class="cart-item__remove" (click)="removeItem(item)">🗑</button>
       </div>
 
-      <p class="cart-item__line-total">
-        ${{ (item.price * item.quantity) | number:'1.2-2' }}
-      </p>
+      <button class="cart-item__remove" (click)="removeItem(item)">✕</button>
     </div>
   </div>
 
