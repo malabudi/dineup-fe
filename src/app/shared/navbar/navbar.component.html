@@ -8,7 +8,7 @@
 
     <a routerLink="/orders" class="navbar__link">My Orders</a>
 
-    <button routerLink="/checkout" class="navbar__cart">
+    <button (click)="toggleCart()" class="navbar__cart">
       <span class="navbar__cart-icon">🛒</span>
       <span
         class="navbar__cart-badge"

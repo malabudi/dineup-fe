@@ -46,6 +46,15 @@ html, body {
   color: var(--color-text-primary);
 }
 
+body {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 a {
   color: var(--color-secondary);
   text-decoration: none;
