@@ -1,1 +1,61 @@
-<p>checkout works!</p>
+<div class="checkout">
+
+  <h1 class="checkout__title">Review Your Order</h1>
+
+  <!-- Error banner -->
+  <div class="checkout__error" [class.visible]="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Order items -->
+  <div class="checkout__card">
+    <h2 class="checkout__section-title">Order Summary</h2>
+
+    <div class="checkout__items">
+      <div
+        *ngFor="let item of cartItems; trackBy: trackByItemId"
+        class="checkout-item"
+      >
+        <div class="checkout-item__info">
+          <p class="checkout-item__name">{{ item.menuItemName }}</p>
+          <p class="checkout-item__meta">
+            ${{ item.price | number:'1.2-2' }} × {{ item.quantity }}
+          </p>
+        </div>
+        <p class="checkout-item__total">
+          ${{ (item.price * item.quantity) | number:'1.2-2' }}
+        </p>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="checkout__divider"></div>
+
+    <!-- Total -->
+    <div class="checkout__total">
+      <span>Total</span>
+      <span>${{ total | number:'1.2-2' }}</span>
+    </div>
+  </div>
+
+  <!-- Actions -->
+  <div class="checkout__actions">
+    <button class="checkout__back-btn" (click)="goBackToMenu()">
+      ← Back to Menu
+    </button>
+
+    <app-button
+      label="Place Order"
+      [loading]="loading"
+      type="button"
+      variant="primary"
+      (clicked)="placeOrder()"
+    />
+  </div>
+
+  <!-- Error banner -->
+  <div class="checkout__error" [class.visible]="errorMessage">
+    {{ errorMessage }}
+  </div>
+
+</div>
